@@ -1,0 +1,14 @@
+{
+    "name": "hub-server-details",
+    "description": "hub-server-details component",
+    "local": [],
+    "scripts": ["index.js"],
+    "styles": ["styles.css"],
+    "templates": ["template.html", "update.html"],
+    "main": "index.js",
+    "dependencies": {
+        "serandomps/dust": "master",
+        "serandomps/serand": "master",
+        "serandomps/socket.io": "master"
+    }
+}
