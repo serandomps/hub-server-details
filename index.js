@@ -2,6 +2,8 @@ var dust = require('dust')();
 var serand = require('serand');
 var io = require('socket.io');
 
+var consol;
+
 var HUB = 'wss://hub.serandives.com:4000/app';
 
 var hub = io.connect(HUB, {
@@ -9,8 +11,9 @@ var hub = io.connect(HUB, {
 });
 
 hub.once('connect', function () {
-    hub.on('', function () {
-
+    hub.on('done', function (options) {
+        console.log(options);
+        consol.append(options.data);
     });
 });
 
@@ -39,17 +42,36 @@ var update = function (options, parent, done) {
             return;
         }
         var el = $(out);
-        $('.update', el).click(function () {
-            console.log('updating');
-            hub.emit('exec', {
-                plugin: 'hub',
-                action: 'update',
+        consol = $('.console', el);
+        $('.clone', el).click(function () {
+            console.log('clone');
+            hub.emit('do', {
+                plugin: 'git',
+                action: 'clone',
+                repo: 'https://github.com/serandules/hub-client.git',
+                dir: '/Users/ruchira/sandbox/serandives/hub',
                 id: $(this).data('id')
             });
         });
-        $('.list', el).click(function () {
-            console.log('listing');
-            hub.emit('exec', {
+        $('.pull', el).click(function () {
+            console.log('pull');
+            hub.emit('do', {
+                plugin: 'git',
+                action: 'pull',
+                id: $(this).data('id')
+            });
+        });
+        $('.status', el).click(function () {
+            console.log('status');
+            hub.emit('do', {
+                plugin: 'git',
+                action: 'status',
+                id: $(this).data('id')
+            });
+        });
+        $('.start', el).click(function () {
+            console.log('start');
+            hub.emit('do', {
                 plugin: 'sh',
                 action: 'run',
                 id: $(this).data('id'),
@@ -57,9 +79,19 @@ var update = function (options, parent, done) {
                 args: ['-alh']
             });
         });
-        $('.ps', el).click(function () {
-            console.log('ps -ef');
-            hub.emit('exec', {
+        $('.restart', el).click(function () {
+            console.log('restart');
+            hub.emit('do', {
+                plugin: 'sh',
+                action: 'run',
+                id: $(this).data('id'),
+                command: 'ps',
+                args: ['-ef']
+            });
+        });
+        $('.stop', el).click(function () {
+            console.log('stop');
+            hub.emit('do', {
                 plugin: 'sh',
                 action: 'run',
                 id: $(this).data('id'),

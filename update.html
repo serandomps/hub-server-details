@@ -1,14 +1,43 @@
-<div class="col-md-9">
+<div class="hub-server-details-update">
     <table class="table table-striped table-bordered">
         <tbody>
         <tr>
-            <td>1</td>
+            <td>Git Clone</td>
             <td>
-                <button type="button" class="btn btn-info update" data-id="{id}">Update</button>
-                <button type="button" class="btn btn-info list" data-id="{id}">ls -alh</button>
-                <button type="button" class="btn btn-info ps" data-id="{id}">ps -ef</button>
+                <button type="button" class="btn btn-info clone" data-id="{id}">Clone</button>
+            </td>
+        </tr>
+        <tr>
+            <td>Git Pull</td>
+            <td>
+                <button type="button" class="btn btn-info pull" data-id="{id}">Pull</button>
+            </td>
+        </tr>
+        <tr>
+            <td>Git Status</td>
+            <td>
+                <button type="button" class="btn btn-info status" data-id="{id}">Status</button>
+            </td>
+        </tr>
+        <tr>
+            <td>Start Server</td>
+            <td>
+                <button type="button" class="btn btn-info start" data-id="{id}">Start</button>
+            </td>
+        </tr>
+        <tr>
+            <td>Restart Server</td>
+            <td>
+                <button type="button" class="btn btn-info restart" data-id="{id}">Restart</button>
+            </td>
+        </tr>
+        <tr>
+            <td>Stop Server</td>
+            <td>
+                <button type="button" class="btn btn-info stop" data-id="{id}">Stop</button>
             </td>
         </tr>
         </tbody>
     </table>
+    <pre class="console"></pre>
 </div>
