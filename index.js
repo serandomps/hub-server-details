@@ -2,13 +2,13 @@ var dust = require('dust')();
 var serand = require('serand');
 var io = require('socket.io');
 
-var HUB = 'wss://hub.serandives.com:4000/hub';
+var HUB = 'wss://hub.serandives.com:4000/app';
 
 var hub = io.connect(HUB, {
     transports: ['websocket']
 });
 
-hub.on('connect', function () {
+hub.once('connect', function () {
     hub.on('', function () {
 
     });
@@ -45,6 +45,26 @@ var update = function (options, parent, done) {
                 plugin: 'hub',
                 action: 'update',
                 id: $(this).data('id')
+            });
+        });
+        $('.list', el).click(function () {
+            console.log('listing');
+            hub.emit('exec', {
+                plugin: 'sh',
+                action: 'run',
+                id: $(this).data('id'),
+                command: 'ls',
+                args: ['-alh']
+            });
+        });
+        $('.ps', el).click(function () {
+            console.log('ps -ef');
+            hub.emit('exec', {
+                plugin: 'sh',
+                action: 'run',
+                id: $(this).data('id'),
+                command: 'ps',
+                args: ['-ef']
             });
         });
         parent.html(el);
