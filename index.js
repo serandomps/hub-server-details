@@ -43,13 +43,10 @@ var update = function (options, parent, done) {
         }
         var el = $(out);
         consol = $('.console', el);
-        $('.clone', el).click(function () {
-            console.log('clone');
-            hub.emit('do', {
-                plugin: 'git',
-                action: 'clone',
+        $('.drone-start', el).click(function () {
+            console.log('drone start');
+            hub.emit('drone start', {
                 repo: 'https://github.com/serandules/hub-client.git',
-                dir: '/Users/ruchira/sandbox/serandives/hub',
                 id: $(this).data('id')
             });
         });
@@ -113,3 +110,9 @@ module.exports = function (sandbox, fn, options) {
             return;
     }
 };
+
+serand.on('hub', 'drone start', function (data) {
+    console.log('recevied event');
+    console.log(data);
+    hub.emit('drone start', data);
+});
