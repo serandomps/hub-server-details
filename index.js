@@ -6,7 +6,7 @@ var consol;
 
 var HUB = 'wss://hub.serandives.com:4000/app';
 
-var hub = io.connect(HUB, {
+/*var hub = io.connect(HUB, {
     transports: ['websocket']
 });
 
@@ -15,7 +15,7 @@ hub.once('connect', function () {
         console.log(options);
         consol.append(options.data);
     });
-});
+});*/
 
 dust.loadSource(dust.compile(require('./template'), 'hub-server-details'));
 dust.loadSource(dust.compile(require('./update'), 'hub-server-details-update'));
@@ -111,8 +111,8 @@ module.exports = function (sandbox, fn, options) {
     }
 };
 
-serand.on('hub', 'drone start', function (data) {
-    console.log('recevied event');
+/*serand.on('hub', 'drones start', function (data) {
+    console.log('received event');
     console.log(data);
-    hub.emit('drone start', data);
-});
+    hub.emit('drones start', data);
+});*/
